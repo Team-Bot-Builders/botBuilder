@@ -5,15 +5,15 @@ Charles Bofferding
 ## Cooperation Plan ##
 - What are the key strengths of each person on the team?
 - - Chaz: Hardware and logic
-- - Joshua:
+- - Joshua: Growth mindset/constant improvement proficiency.
 - - Steven:
 - How can you best utilize these strengths in the execution of your project?
 - - Chaz: By helping us logic to define complex behaviors of the bot.
-- - Joshua
+- - Joshua: I'm not afraid to learn new skills/technologies and can use that to research and investigate bot implementation.
 - - Steven:
 - In which professional competencies do you each want to develop greater strength?
 - - Chaz: Sending out API requests 
-- - Joshua:
+- - Joshua: Tool proficiency. I'd love to learn to better use Visual Studio.
 - - Steven:
 - Knowing that every person in your team needs to understand all aspects of the project, how do you plan to approach the day-to-day work?
 - - The day to day work will be very variable because of the limited time for the project as well as the unknown hurdles we will need to face. That said, the plan is to have tasks for each individual assigned in the morning, and then a check in later in the day to see how everyone progressed during the first half of the day. This will be the time when everyone can review the progress of the others and gain insight into all aspects of the project.
