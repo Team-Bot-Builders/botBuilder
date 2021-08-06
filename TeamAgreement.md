@@ -8,7 +8,7 @@ Charles Bofferding
 - - Joshua:
 - - Steven:
 - How can you best utilize these strengths in the execution of your project?
-- - Chaz: 
+- - Chaz: By helping us logic to define complex behaviors of the bot.
 - - Joshua
 - - Steven:
 - In which professional competencies do you each want to develop greater strength?
