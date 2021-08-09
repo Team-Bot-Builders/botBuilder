@@ -1,7 +1,7 @@
 # Bot Builder #
 
 ## Idea ## 
-Create a Bot for disscord that allows members of a specific server add tickets with problems to be resolved. Those tickets will be added to a restful API server.
+Create a Bot for discord that allows members of a specific server add tickets with problems to be resolved. Those tickets will be added to a restful API server.
 Finally user with administrator privileges should be able to view those tickets and resolve them.
 
 ## Expected Pain Points ##
