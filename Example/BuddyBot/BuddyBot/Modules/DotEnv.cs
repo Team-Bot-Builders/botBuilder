@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DotEnvStuff
 
-{
+{//
     public static class DotEnv
     {
         public static void Load(string filePath)

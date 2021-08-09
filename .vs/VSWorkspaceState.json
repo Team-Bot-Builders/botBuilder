@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Example"
+    "\\Example",
+    "\\Example\\BuddyBot",
+    "\\Example\\BuddyBot\\BuddyBot",
+    "\\Example\\BuddyBot\\BuddyBot\\Modules"
   ],
-  "SelectedNode": "\\Example",
+  "SelectedNode": "\\Example\\BuddyBot\\BuddyBot.sln",
   "PreviewInSolutionExplorer": false
 }

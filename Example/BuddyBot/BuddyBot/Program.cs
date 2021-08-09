@@ -16,7 +16,7 @@ namespace BuddyBot
             new Program().RunBotAsync().GetAwaiter().GetResult();
             }
         
-
+        //Creating a difference so the pull request goes through
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
