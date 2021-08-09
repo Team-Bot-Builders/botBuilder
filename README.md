@@ -100,3 +100,4 @@ This project is open source and available under the [MIT License](./LICENSE).
 
 * [Project Pitch](./ProjectPitch.md)
 * [Team Agreements](./TeamAgreements.md)
+* [User Stories](https://github.com/Team-Bot-Builders/botBuilder/projects/1)
