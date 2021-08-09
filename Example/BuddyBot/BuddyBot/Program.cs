@@ -5,13 +5,17 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using DotEnvStuff;
 
 namespace BuddyBot
 {
     class Program
     {
-        static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
- 
+        static void Main(string[] args)
+            {
+            new Program().RunBotAsync().GetAwaiter().GetResult();
+            }
+        
 
         private DiscordSocketClient _client;
         private CommandService _commands;
@@ -28,7 +32,7 @@ namespace BuddyBot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string token = "ODczMzEzMjExNTI3NjEwMzk4.YQ2mTw.vUaThW0p9MTdKybTGdghCPJ_rFI";
+            string token = "ODczMzEzMjExNTI3NjEwMzk4.YQ2mTw.O7IM2P_wnYynWWU9Q1wTs-6wI-8";
 
             _client.Log += _client_Log;
 

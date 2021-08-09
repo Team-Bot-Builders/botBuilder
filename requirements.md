@@ -2,7 +2,7 @@
 
 ## Vision ##
 
-WHAT IS YOUR PURPOSE
+This project is designed to create a discord bot to instantiate and manage user help tickets for scalable team workflows.
 
 ## Scope (In/Out) ##
 
@@ -10,13 +10,12 @@ WHAT IS YOUR PURPOSE
 - - API connects ot Discord Bot
 - - Submitting a ticket to the database
 - - Retreiving a ticket from the database
-- - Administrator closing a ticket
+- - Administrator/Moderator closing a ticket
 - - Administrator can change user's privelege level
 
 - Out of Scope:
 - - Integrating Discord authorization with outside services
-- - Recreatig work added by the Identity service
-- - 
+- - Recreating work added by the Identity service
 
 ## Minimum Viable Project (MVP) ##
 - Users able to POST tickets to SQL server
@@ -24,19 +23,17 @@ WHAT IS YOUR PURPOSE
 - Admins able to UPDATE  tickets while resolving them
 - Admin able to view all tickets, both open and closed
 
-
 ## Stretch Goals ##
 - Server can respond with data like total number of completed tickets or average time to resolution for a ticket
 - Bot can detect if a single user is abusing system and automatically put them in "probation"
-- 
 
 ## Functional Requirements ##
 - Admin can alter permission levels of other users
 - Regular user can submit tickets
 - Moderators can receive tickets
 - Moderators can resolve tickets
-- Server can load tickets into the database through API calls
-- Server can retreive tickets from the database through API calls
+- Server can POST tickets into the database through API calls
+- Server can GET tickets from the database through API calls
 
 ## Data Flow ##
 The user will generate tickets, which will then be packaged up by the Discord Bot.

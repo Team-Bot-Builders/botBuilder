@@ -32,14 +32,70 @@ namespace BuddyBot.Modules
         //[RequireUserPermission(GuildPermission.KickMembers)]
         public async Task Moderator()
         {
-            GuildPermissions newSet = GuildPermissions(bool createInstantInvite = false, bool kickMembers = false, bool banMembers = false, bool administrator = false,
-                        bool manageChannels = false, bool manageGuild = false, bool addReactions = false, bool viewAuditLog = false,
-                        bool viewGuildInsights = false, bool viewChannel = false, bool sendMessages = false, bool sendTTSMessages = false,
-                        bool manageMessages = false, bool embedLinks = false, bool attachFiles = false, bool readMessageHistory = false,
-                        bool mentionEveryone = false, bool useExternalEmojis = false, bool connect = false, bool speak = false,
-                        bool muteMembers = false, bool deafenMembers = false, bool moveMembers = false, bool useVoiceActivation = false,
-                        bool prioritySpeaker = false, bool stream = false, bool changeNickname = false, bool manageNicknames = false,
-                        bool manageRoles = false, bool manageWebhooks = false, bool manageEmojis = false);
+            GuildPermissions newSet = new GuildPermissions(
+                //bool createInstantInvite = 
+                false, 
+                //bool kickMembers = 
+                false, 
+                //bool banMembers = 
+                false, 
+                //bool administrator = 
+                false,
+                //bool manageChannels = 
+                false, 
+                //bool manageGuild = 
+                false, 
+                //bool addReactions = 
+                false, 
+                //bool viewAuditLog = 
+                false,
+                //bool viewGuildInsights = 
+                false, 
+                //bool viewChannel = 
+                false, 
+                //bool sendMessages = 
+                false, 
+                //bool sendTTSMessages = 
+                false,
+                //bool manageMessages = 
+                false, 
+                //bool embedLinks = 
+                false, 
+                //bool attachFiles = 
+                false, 
+                //bool readMessageHistory = 
+                false,
+                //bool mentionEveryone = 
+                false, 
+                //bool useExternalEmojis = 
+                false, 
+                //bool connect = 
+                false, 
+                //bool speak = 
+                false,
+                //bool muteMembers = 
+                false, 
+                //bool deafenMembers = 
+                false, 
+                //bool moveMembers = 
+                false, 
+                //bool useVoiceActivation = 
+                false,
+                //bool prioritySpeaker = 
+                false, 
+                //bool stream =
+                false, 
+                //bool changeNickname = 
+                false, 
+                //bool manageNicknames = 
+                false,
+                //bool manageRoles = 
+                false, 
+                //bool manageWebhooks = 
+                false, 
+                //bool manageEmojis = 
+                false);
+
             await ReplyAsync("Pong");
         }
 
