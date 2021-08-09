@@ -1522,23 +1522,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\noctu\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\steve\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
+      "projectUniqueName": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
       "projectName": "BuddyBot",
-      "projectPath": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
-      "packagesPath": "C:\\Users\\noctu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\obj\\",
+      "projectPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
+      "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\noctu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
