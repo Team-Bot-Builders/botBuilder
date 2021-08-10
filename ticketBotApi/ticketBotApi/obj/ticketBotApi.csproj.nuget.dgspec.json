@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj": {}
+    "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj": {
+    "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj",
+        "projectUniqueName": "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj",
         "projectName": "ticketBotApi",
-        "projectPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj",
-        "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\obj\\",
+        "projectPath": "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj",
+        "packagesPath": "C:\\Users\\joshh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\joshh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
