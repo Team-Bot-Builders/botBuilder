@@ -25,6 +25,6 @@ namespace ticketBotApi.Models
         public bool Resolved { get; set; }
 
         [Required]
-        public string Requester { get; set; }
+        public string Requestor { get; set; }
     }
 }
