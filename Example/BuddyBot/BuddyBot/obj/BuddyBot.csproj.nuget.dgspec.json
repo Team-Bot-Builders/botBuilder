@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj": {}
+    "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj": {
+    "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
+        "projectUniqueName": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
         "projectName": "BuddyBot",
-        "projectPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
-        "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steve\\Documents\\projects\\codefellows\\401\\midterm\\botBuilder\\Example\\BuddyBot\\BuddyBot\\obj\\",
+        "projectPath": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\BuddyBot.csproj",
+        "packagesPath": "C:\\Users\\noctu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\noctu\\source\\repos\\botBuilder\\Example\\BuddyBot\\BuddyBot\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\noctu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +46,18 @@
             "Discord.Net": {
               "target": "Package",
               "version": "[2.4.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
