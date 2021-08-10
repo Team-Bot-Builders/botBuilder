@@ -6,17 +6,45 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using DotEnvStuff;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+using BuddyBot.Modules;
 
 namespace BuddyBot
 {
     class Program
     {
+
+        private static string BotToken;
+
         static void Main(string[] args)
-            {
+        {
+
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json").Build();
+
+            var section = config.GetSection(nameof(Secrets));
+            var secrets = section.Get<Secrets>();
+            BotToken = secrets.BotToken;
+
+            /*            //load in environmental stuff https://dusted.codes/dotenv-in-dotnet
+                        var root = Directory.GetCurrentDirectory();
+                        var dotenv = Path.Combine(root, ".env");
+                        DotEnv.Load(dotenv);*/
+
             new Program().RunBotAsync().GetAwaiter().GetResult();
+<<<<<<< HEAD
+        }
+
+
+
+
+=======
             }
         
         //Creating a difference so the pull request goes through
+>>>>>>> development
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
@@ -32,7 +60,8 @@ namespace BuddyBot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string token = "ODczMzEzMjExNTI3NjEwMzk4.YQ2mTw.O7IM2P_wnYynWWU9Q1wTs-6wI-8";
+
+            string token = BotToken;
 
             _client.Log += _client_Log;
 
