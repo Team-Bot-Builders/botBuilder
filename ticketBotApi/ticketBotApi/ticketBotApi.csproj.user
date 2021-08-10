@@ -10,5 +10,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>ticketBotApi.Data.TicketBotDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\joshh\OneDrive\Desktop\coding\cf\401\midterm\botBuilder\.github\workflows\ticketBotApi20210810100604.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
