@@ -50,7 +50,7 @@ namespace ticketBotApi
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<TicketBotDbContext>();
-            services.AddTransient<IUserService, IdentityUserService > ();
+            services.AddTransient<IUserService, IdentityUserService>();
             services.AddTransient<IResolvedTickets, ResolvedTicketService>();
             services.AddTransient<ILiveTickets, LiveTicketService>();
             services.AddScoped<JwtTokenService>();
