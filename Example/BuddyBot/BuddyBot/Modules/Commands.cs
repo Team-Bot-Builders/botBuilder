@@ -211,6 +211,8 @@ namespace BuddyBot.Modules
 
             await Context.User.SendMessageAsync(jsonFormatted);
         }
+
+        //use to close a live ticket and update it with resolution
         [Command("closeTicket")]
         public async Task CloseTicket(int id, string resolution)
         {
