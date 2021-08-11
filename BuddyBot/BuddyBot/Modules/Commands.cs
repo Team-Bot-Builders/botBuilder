@@ -17,6 +17,7 @@ namespace BuddyBot.Modules
     public class Commands : ModuleBase<SocketCommandContext>
     {
 
+        // Permission: Anyone
         [Command("myRoleInfo")]
         public async Task MyRoleInfo()
         {
@@ -28,7 +29,9 @@ namespace BuddyBot.Modules
 
         }
 
+        // Permission: Admin
         [Command("addRole")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task AddRole(string username)
         {
 
@@ -64,6 +67,7 @@ namespace BuddyBot.Modules
 
 
         //Basic ping test
+        //Permission: Anyone
         [Command("ping")]
         public async Task Ping()
         {
@@ -71,6 +75,7 @@ namespace BuddyBot.Modules
         }
 
         //Reads user input
+        //Permission: Anyone
         [Command("callback")]
         public async Task Callback(string message)
         {
@@ -80,86 +85,17 @@ namespace BuddyBot.Modules
             await Context.User.SendMessageAsync("Here is your DM message! ;) " + message + " " + temp);
         }
 
-        //Adding Role "Moderator"
-        [Command("moderator")]
-        //[RequireUserPermission(GuildPermission.KickMembers)]
-        public async Task Moderator()
-        {
-            GuildPermissions newSet = new GuildPermissions(
-                //bool createInstantInvite = 
-                false,
-                //bool kickMembers = 
-                false,
-                //bool banMembers = 
-                false,
-                //bool administrator = 
-                false,
-                //bool manageChannels = 
-                false,
-                //bool manageGuild = 
-                false,
-                //bool addReactions = 
-                false,
-                //bool viewAuditLog = 
-                false,
-                //bool viewGuildInsights = 
-                false,
-                //bool viewChannel = 
-                false,
-                //bool sendMessages = 
-                false,
-                //bool sendTTSMessages = 
-                false,
-                //bool manageMessages = 
-                false,
-                //bool embedLinks = 
-                false,
-                //bool attachFiles = 
-                false,
-                //bool readMessageHistory = 
-                false,
-                //bool mentionEveryone = 
-                false,
-                //bool useExternalEmojis = 
-                false,
-                //bool connect = 
-                false,
-                //bool speak = 
-                false,
-                //bool muteMembers = 
-                false,
-                //bool deafenMembers = 
-                false,
-                //bool moveMembers = 
-                false,
-                //bool useVoiceActivation = 
-                false,
-                //bool prioritySpeaker = 
-                false,
-                //bool stream =
-                false,
-                //bool changeNickname = 
-                false,
-                //bool manageNicknames = 
-                false,
-                //bool manageRoles = 
-                false,
-                //bool manageWebhooks = 
-                false,
-                //bool manageEmojis = 
-                false);
-
-            await ReplyAsync("Pong");
-        }
-
+        //Permission: Anyone
         [Command("help")]
         public async Task Help()
         {
             string sender = Context.User.Username;
 
-            await Context.User.SendMessageAsync($"Hello {sender}! Thank you for using SupportBot!\n  To submit a ticket, please use the command !newTicket here followed by a brief description of your troubles. A moderator will assist you shortly.");
+            await Context.User.SendMessageAsync($"Hello {sender}! Thank you for using SupportBot!\n  To submit a ticket, please use the command !newTicket here followed by a brief description of your troubles in parantheses. A moderator will assist you shortly.");
+            await Context.User.SendMessageAsync($"Example: !newTicket \"Having trouble logging in.\"");
         }
 
+        //Permision: Anyone
         [Command("newTicket")]
         public async Task NewTicket(string description)
         {
@@ -182,7 +118,10 @@ namespace BuddyBot.Modules
 
             await Context.User.SendMessageAsync("Your ticket has been added to the queue!");
         }
+        
+        //Permission: Mod/Admin
         [Command("viewOpenTickets")]
+        [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetOpenTickets()
         {
             string url = "https://localhost:44322/api/LiveTickets";
@@ -195,10 +134,20 @@ namespace BuddyBot.Modules
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
 
-            await Context.User.SendMessageAsync($"These are the available tickets:\n {jsonFormatted}");
+            if(Context.Channel.Name == "ticket-info")
+            {
+                await ReplyAsync($"These are the available tickets:\n {jsonFormatted}");
+            }
+            else
+            {
+                await Context.User.SendMessageAsync($"These are the available tickets:\n {jsonFormatted}");
+            }
 
         }
+        
+        //Permission Mod/Admin
         [Command("getTicket")]
+        [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetTicket(int id)
         {
             string url = $"https://localhost:44322/api/LiveTickets/{id}";
@@ -209,11 +158,20 @@ namespace BuddyBot.Modules
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
 
-            await Context.User.SendMessageAsync(jsonFormatted);
+            if (Context.Channel.Name == "ticket-info")
+            {
+                await ReplyAsync(jsonFormatted);
+            }
+            else
+            {
+                await Context.User.SendMessageAsync(jsonFormatted);
+            }
         }
 
         //use to close a live ticket and update it with resolution
+        //Permission: Mod/Admin
         [Command("closeTicket")]
+        [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task CloseTicket(int id, string resolution)
         {
             Console.WriteLine("hit the route");
@@ -249,6 +207,5 @@ namespace BuddyBot.Modules
 
         //Stretch Goals
         //Have bot register user with API server
-
     }
 }
