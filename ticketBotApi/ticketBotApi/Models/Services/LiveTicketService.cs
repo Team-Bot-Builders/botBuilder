@@ -20,7 +20,14 @@ namespace ticketBotApi.Models.Services
 
         public async Task<LiveTicketDTO> CreateLiveTicket(LiveTicketDTO ticket)
         {
-            _context.Entry(ticket).State = EntityState.Added;
+            SupportTicket newTicket = new SupportTicket()
+            {
+                Created = ticket.Created,
+                Requestor = ticket.Requestor,
+                Description = ticket.Description,
+                Resolved = false
+            };
+            _context.Entry(newTicket).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return await _context.Tickets
                 .Select(ticket => new LiveTicketDTO
@@ -34,6 +41,7 @@ namespace ticketBotApi.Models.Services
         public async Task<List<LiveTicketDTO>> GetAllLiveTickets()
         {
             return await _context.Tickets
+                .Where(ticket => ticket.Resolved == false)
                 .Select(ticket => new LiveTicketDTO
                 {
                     Id = ticket.Id,
@@ -56,19 +64,37 @@ namespace ticketBotApi.Models.Services
                 }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
         }
 
-        public async Task<LiveTicketDTO> UpdateTicket(int id, SupportTicket ticket)
+        public async Task<SupportTicket> UpdateTicket(int id, SupportTicket ticket)
         {
             _context.Entry(ticket).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
+            return await _context.Tickets.FindAsync(id);
+        }
+
+        
+        public async Task<ResolvedTicketDTO> CloseTicket(int id, CloseTicketDTO closing)
+        {
+            SupportTicket thisTicket = await _context.Tickets.FindAsync(id);
+            thisTicket.Resolved = true;
+            thisTicket.Resolver = closing.Resolver;
+            thisTicket.Resolution = closing.Resolution;
+            thisTicket.Closed = closing.Closed;
+
+            _context.Entry(thisTicket).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
             return await _context.Tickets
-                .Select(ticket => new LiveTicketDTO
+                .Select(ticket => new ResolvedTicketDTO
                 {
                     Id = ticket.Id,
                     Requestor = ticket.Requestor,
                     Description = ticket.Description,
-                    Created = ticket.Created
-                }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
+                    Resolver = ticket.Resolver,
+                    Resolution = ticket.Resolution,
+                    Created = ticket.Created,
+                    Closed = ticket.Closed
+                }).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task DeleteLiveTicket(int id)
@@ -77,5 +103,6 @@ namespace ticketBotApi.Models.Services
             _context.Entry(ticket).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
+
     }
 }

@@ -52,6 +52,14 @@ namespace ticketBotApi.Controllers
             return Ok(updatedTicket);
         }
 
+        //PUT: /api/LiveTickets/close/3
+        [HttpPut("/close/{id}")]
+        public async Task<IActionResult> CloseLiveTicket(int id, CloseTicketDTO closing)
+        {
+            var updatedTicket = await _liveTickets.CloseTicket(id, closing);
+            return Ok(updatedTicket);
+        }
+
         // POST: api/LiveTickets
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

@@ -85,7 +85,7 @@ namespace BuddyBot
             if (message.Author.IsBot) return;
 
             int argPos = 0;
-            if (message.HasStringPrefix("!", ref argPos))
+            if (message.HasStringPrefix("[!]", ref argPos))
             {
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
