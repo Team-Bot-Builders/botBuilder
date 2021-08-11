@@ -34,9 +34,19 @@ namespace BuddyBot
                         DotEnv.Load(dotenv);*/
 
             new Program().RunBotAsync().GetAwaiter().GetResult();
+<<<<<<< HEAD
         }
 
-        
+
+
+
+
+=======
+            }
+
+        //Creating a difference so the pull request goes through
+>>>>>>> development
+
 
         private DiscordSocketClient _client;
         private CommandService _commands;
