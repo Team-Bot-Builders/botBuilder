@@ -20,7 +20,9 @@ namespace ticketBotApi.Models.Interfaces
 
 
         // UPDATE
-        Task<LiveTicketDTO> UpdateTicket(int id, SupportTicket ticket);
+        Task<SupportTicket> UpdateTicket(int id, SupportTicket ticket);
+
+        Task<ResolvedTicketDTO> CloseTicket(int id, CloseTicketDTO closing);
 
         // DELETE
         Task DeleteLiveTicket(int id);

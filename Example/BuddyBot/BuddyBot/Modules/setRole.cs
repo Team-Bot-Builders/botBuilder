@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ﻿using Discord;
 using Discord.Commands;
 using System;
+=======
+﻿using System;
+>>>>>>> development
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.Modules
 {
+<<<<<<< HEAD
     class setRole : ModuleBase<SocketCommandContext>
     {
         [Command("roleInfo")]
@@ -168,5 +173,9 @@ namespace BuddyBot.Modules
                 //bool manageEmojis = 
                 true);
 
+=======
+    class setRole
+    {
+>>>>>>> development
     }
 }

@@ -61,3 +61,13 @@ C:\Users\noctu\source\repos\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.
 C:\Users\noctu\source\repos\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\noctu\source\repos\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\noctu\source\repos\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Configuration.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\steve\Documents\projects\codefellows\401\midterm\botBuilder\Example\BuddyBot\BuddyBot\bin\Debug\net5.0\RestSharp.dll

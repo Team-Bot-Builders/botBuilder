@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace ticketBotApi.Models.DTOs
 {
-    public class RegisterUserDTO
+    public class CloseTicketDTO
     {
         [Required]
-        public string Username { get; set; }
+        public DateTime Closed { get; set; }
+
         [Required]
-        public string Password { get; set; }
-        public string Email { get; set; }
+        public string Resolution { get; set; }
+
+        [Required]
+        public string Resolver { get; set; }
     }
 }

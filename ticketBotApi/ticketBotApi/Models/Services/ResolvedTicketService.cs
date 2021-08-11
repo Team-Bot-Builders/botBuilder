@@ -27,6 +27,7 @@ namespace ticketBotApi.Models.Services
         public async Task<List<ResolvedTicketDTO>> GetAllResolvedTickets()
         {
             return await _context.Tickets
+                .Where(ticket => ticket.Resolved == false)
                 .Select(ticket => new ResolvedTicketDTO
                 {
                     Id = ticket.Id,

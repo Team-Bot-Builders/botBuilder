@@ -33,13 +33,11 @@ namespace ticketBotApi.Models.Services
 
             if(result.Succeeded)
             {
-                await _userManager.AddToRolesAsync(user, data.Roles);
                 return new UserDTO
                 {
                     Id = user.Id,
                     Username = user.UserName,
                     Token = await _tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(60)),
-                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
 
