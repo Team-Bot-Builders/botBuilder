@@ -35,7 +35,7 @@ namespace BuddyBot
 
             new Program().RunBotAsync().GetAwaiter().GetResult();
         }
-
+        
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;

@@ -3,8 +3,12 @@
 <<<<<<< HEAD
   "dgSpecHash": "wyM47WnoM49WHMS9YFO7bvldlsOpCRuSG858sIfY+ZAVXN2S6ubZRES26auFqRDVHh6UvXAcpQOO3rutOdBoxA==",
 =======
+<<<<<<< HEAD
+  "dgSpecHash": "wyM47WnoM49WHMS9YFO7bvldlsOpCRuSG858sIfY+ZAVXN2S6ubZRES26auFqRDVHh6UvXAcpQOO3rutOdBoxA==",
+=======
   "dgSpecHash": "FMiifhwnpTwZdNfEJmFBjDvD372koVI3bqHi/MuYnZQlO8Sde80e6IYUMo4gYtYSZ03KP0g2m1NJ7SW0eVD8KA==",
 >>>>>>> JOSHUA-10-2021
+>>>>>>> development
   "success": true,
   "projectFilePath": "C:\\Users\\joshh\\OneDrive\\Desktop\\coding\\cf\\401\\midterm\\botBuilder\\ticketBotApi\\ticketBotApi\\ticketBotApi.csproj",
   "expectedPackageFiles": [

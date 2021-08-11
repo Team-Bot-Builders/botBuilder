@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BuddyBot.DTO;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -15,6 +16,53 @@ namespace BuddyBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+
+        [Command("myRoleInfo")]
+        public async Task MyRoleInfo()
+        {
+            var guild = Context.Guild.ToString();
+            await ReplyAsync("You are currently at the server/guild: " + guild);
+
+            string userId = Context.User.Discriminator;
+            await ReplyAsync("Your unique ID is: " + userId);
+
+        }
+
+        [Command("addRole")]
+        public async Task AddRole(string username)
+        {
+
+            var users = Context.Guild.GetUsersAsync();
+            string foundUsername = "";
+            string foundDiscriminator = "";
+            var user = Context.User;
+
+            //This targets a user correctly by username
+            await foreach (var collection in users)
+            {
+                foreach (var person in collection)
+                {
+                    if(person.Username == username)
+                    {
+                        //Somehow store that person in a way that will let it be accessed by others
+                        foundUsername = person.Username;
+                        foundDiscriminator = person.Discriminator;
+                        Console.WriteLine(person.Username);
+                        Console.WriteLine(person.Discriminator);
+                        user = (SocketUser)person;
+                    }
+                }
+            }
+
+            //add user to a named role that already exists
+            //https://stackoverflow.com/questions/41686360/discord-net-how-do-i-grant-an-user-a-role
+            var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Moderator");
+            await (user as IGuildUser).AddRoleAsync(role);
+            await Context.User.SendMessageAsync("I have made the user " + foundUsername + ":" + foundDiscriminator + " a moderator");
+
+        }
+
+
         //Basic ping test
         [Command("ping")]
         public async Task Ping()
