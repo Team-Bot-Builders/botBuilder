@@ -9,7 +9,6 @@ namespace ticketBotApi.Models.Interfaces
     public interface IResolvedTickets
     {
         // GET ALL RESOLVED TICKETS
-
         Task<List<ResolvedTicketDTO>> GetAllResolvedTickets();
 
         // GET SINGLE RESOLVED TICKET

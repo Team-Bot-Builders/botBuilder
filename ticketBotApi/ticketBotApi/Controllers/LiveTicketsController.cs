@@ -13,17 +13,29 @@ using ticketBotApi.Models.Interfaces;
 
 namespace ticketBotApi.Controllers
 {
+    /// <summary>
+    /// Controller to handle all of the different methods related to users and their interactions with the Db
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class LiveTicketsController : ControllerBase
     {
+        // Dependency Injection
         private readonly ILiveTickets _liveTickets;
 
+        /// <summary>
+        /// LiveTicketsController constructor
+        /// </summary>
         public LiveTicketsController(ILiveTickets liveTickets)
         {
             _liveTickets = liveTickets;
         }
 
+        /// <summary>
+        /// Get all live tickets
+        /// </summary>
+        /// <permission> Adminmistrators, Moderators and Discord Bots.</permission>
+        /// <returns>List of all live tickets</returns>
         // GET: api/LiveTickets
         [Authorize(Roles ="Administrator, Discord, Moderator")]
         [HttpGet]
@@ -33,6 +45,12 @@ namespace ticketBotApi.Controllers
             return Ok(list);
         }
 
+        /// <summary>
+        /// Get specific live ticket
+        /// </summary>
+        /// <param name="id">Targeted ticket id.</param>
+        /// <permission> Adminmistrators, Moderators and Discord Bots.</permission>
+        /// <returns>Live ticket</returns>
         // GET: api/LiveTickets/5
         [Authorize(Roles = "Administrator, Discord, Moderator")]
         [HttpGet("{id}")]
@@ -51,6 +69,13 @@ namespace ticketBotApi.Controllers
             return BadRequest($"ID does not match a current live ticket. Check if ticket has been resolved.");
         }
 
+        /// <summary>
+        /// Update a specific live ticket
+        /// </summary>
+        /// <param name="id">Targeted ticket id.</param>
+        /// <param name="supportTicket">Support Ticket with updated information .</param>
+        /// <permission> Adminmistrators.</permission>
+        /// <returns>Updated Ticket</returns>
         // PUT: api/LiveTickets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Authorize(Roles = "Administrator")]
@@ -65,6 +90,13 @@ namespace ticketBotApi.Controllers
             return Ok(updatedTicket);
         }
 
+        /// <summary>
+        /// Set the state of a live ticket to reolved
+        /// </summary>
+        /// <param name="id">Targeted ticket id.</param>
+        /// <param name="closing">Support Ticket with updated information .</param>
+        /// <permission> Adminmistrators.</permission>
+        /// <returns>Updated Ticket</returns>
         //PUT: /api/LiveTickets/close/3
         [Authorize(Roles = "Administrator, Discord, Moderator")]
         [HttpPut("close/{id}")]
@@ -82,6 +114,11 @@ namespace ticketBotApi.Controllers
             return BadRequest($"ID does not match a current live ticket. Check if ticket has been resolved.");
         }
 
+        /// <summary>
+        /// Add ticket to the database
+        /// </summary>
+        /// <param name="liveTicket">Support Ticket with all information .</param>
+        /// <returns>Created Ticket</returns>
         // POST: api/LiveTickets
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -91,6 +128,12 @@ namespace ticketBotApi.Controllers
             return CreatedAtAction("GetSupportTicket", new { id = liveTicket.Id }, liveTicket);
         }
 
+        /// <summary>
+        /// Delete live ticket with input id
+        /// </summary>
+        /// <param name="id">Targeted ticket id.</param>
+        /// <permission> Adminmistrators.</permission>
+        /// <returns>No content task response</returns>
         // DELETE: api/LiveTickets/5
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace ticketBotApi.Models.DTOs
 {
+    /// <summary>
+    /// DTO to shape live ticket data
+    /// </summary>
     public class LiveTicketDTO
     {
         public int Id { get; set; }

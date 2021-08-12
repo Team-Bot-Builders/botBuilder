@@ -11,12 +11,20 @@ namespace ticketBotApi.Data
 {
     public class TicketBotDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        //Allows get'ing and set'ing of tickets
         public DbSet<SupportTicket> Tickets { get; set; }
 
+        /// <summary>
+        /// TicketBotDbContext Constructor
+        /// </summary>
         public TicketBotDbContext(DbContextOptions options) : base(options)
         {
         }
 
+        /// <summary>
+        /// Initialize some roles into the database
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
@@ -25,6 +33,12 @@ namespace ticketBotApi.Data
             SeedRole(modelbuilder, "Moderator");
             SeedRole(modelbuilder, "Discord");
         }
+
+        /// <summary>
+        /// Add a role to the databse
+        /// </summary>
+        /// <param name="modelBuilder">Context to use.</param>
+        /// <param name="roleName">Name of the role to be added.</param>
         private void SeedRole(ModelBuilder modelBuilder, string roleName)
         {
             var role = new IdentityRole

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace ticketBotApi.Models.DTOs
 {
+    /// <summary>
+    /// DTO to shape resolved ticket data
+    /// </summary>
     public class ResolvedTicketDTO
     {
         public int Id { get; set; }

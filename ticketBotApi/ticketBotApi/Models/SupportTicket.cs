@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ticketBotApi.Models
 {
+    /// <summary>
+    /// The shape of a Support Ticket in the database
+    /// </summary>
     public class SupportTicket
     {
         public int Id { get; set; }

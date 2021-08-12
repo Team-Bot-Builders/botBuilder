@@ -20,8 +20,10 @@ namespace ticketBotApi
 {
     public class Startup
     {
+        // Dependency Injection
         public IConfiguration Configuration { get; }
 
+        // Statrup Constructor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,12 +33,14 @@ namespace ticketBotApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add in the database
             services.AddDbContext<TicketBotDbContext>(options =>
             {
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
 
+            // Add in swagger
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
@@ -46,6 +50,7 @@ namespace ticketBotApi
                 });
             });
 
+            // Identity Block
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;

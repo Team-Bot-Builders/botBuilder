@@ -11,17 +11,16 @@ namespace ticketBotApi.Models.Interfaces
         // Create
         Task<LiveTicketDTO> CreateLiveTicket(LiveTicketDTO ticket);
 
-        // GET ALL LIVE TICKETS
-
+        // GET all live tickets
         Task<List<LiveTicketDTO>> GetAllLiveTickets();
 
-
+        // GET one live ticket
         Task<LiveTicketDTO> GetLiveTicket(int id);
-
 
         // UPDATE
         Task<SupportTicket> UpdateTicket(int id, SupportTicket ticket);
 
+        // UPDATE
         Task<ResolvedTicketDTO> CloseTicket(int id, CloseTicketDTO closing);
 
         // DELETE

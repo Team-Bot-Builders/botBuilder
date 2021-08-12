@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ticketBotApi.Models.DTOs
 {
+    /// <summary>
+    /// DTO to shape login information
+    /// </summary>
     public class LoginDTO
     {
         [Required]
