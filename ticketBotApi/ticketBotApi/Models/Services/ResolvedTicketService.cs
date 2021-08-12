@@ -42,7 +42,6 @@ namespace ticketBotApi.Models.Services
 
         public async Task<ResolvedTicketDTO> GetResolvedTicket(int id)
         {
-            SupportTicket ticket = await _context.Tickets.FindAsync(id);
             return await _context.Tickets
                 .Select(ticket => new ResolvedTicketDTO
                 {
@@ -53,7 +52,7 @@ namespace ticketBotApi.Models.Services
                     Resolution = ticket.Resolution,
                     Created = ticket.Created,
                     Closed = ticket.Closed
-                }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
+                }).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<ResolvedTicketDTO> UpdateResolvedTicket(int id, SupportTicket ticket)

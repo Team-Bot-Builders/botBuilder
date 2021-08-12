@@ -11,7 +11,7 @@ namespace TicketAPITests
     public class TicketTests : Mock
     {
         [Fact]
-        public async void Test1()
+        public async void CanCreateTicket()
         {
 
             LiveTicketService service = new LiveTicketService(_dbContext);
@@ -23,16 +23,6 @@ namespace TicketAPITests
                 Description = "I need help checking if a new ticket can be made"
             };
             LiveTicketDTO createdTicket = await service.CreateLiveTicket(ticketInput);
-            
-            SqliteCommand newComm = _connection.CreateCommand();
-            newComm.CommandText = "SELECT * FROM Tickets";
-            var result = newComm.ExecuteReader();
-            while(result.Read())
-            {
-                string value = Convert.ToString(result["Id"]);
-                Console.WriteLine("hello");
-            }
-
 
             LiveTicketDTO ticketFromTable = await service.GetLiveTicket(createdTicket.Id);
 
@@ -42,18 +32,26 @@ namespace TicketAPITests
         [Fact]
         public async void CanCloseAndDeleteTicket()
         {
+            LiveTicketService service = new LiveTicketService(_dbContext);
+            ResolvedTicketService resService = new ResolvedTicketService(_dbContext);
+            SupportTicket newTicket = await CreateTestTicket();
 
+            CloseTicketDTO closer = new()
+            {
+                Closed = DateTime.Now,
+                Resolution = "Ran some tests and did some detailed debugging",
+                Resolver = "Ed Younskevicius"
+            };
+
+            ResolvedTicketDTO result = await service.CloseTicket(1, closer);
+
+            Assert.Equal(newTicket.Requestor, result.Requestor);
+
+            await resService.DeleteResolvedTicket(1);
+
+            ResolvedTicketDTO missing = await resService.GetResolvedTicket(1);
+
+            Assert.Null(missing);
         }
-        [Fact]
-        public async void CanRegisterAndLogin()
-        {
-
-        }
-        [Fact]
-        public async void NoClosesForNonMods()
-        {
-
-        }
-
     }
 }
