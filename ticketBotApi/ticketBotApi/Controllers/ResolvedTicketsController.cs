@@ -23,7 +23,7 @@ namespace ticketBotApi.Controllers
             _resolvedTickets = resolvedTickets;
         }
 
-        // GET: api/LiveTickets
+        // GET: api/ResolvedTickets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ResolvedTicketDTO>>> GetTickets()
         {
@@ -31,12 +31,21 @@ namespace ticketBotApi.Controllers
             return Ok(list);
         }
 
-        // GET: api/LiveTickets/5
+        // GET: api/ResolvedTickets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ResolvedTicketDTO>> GetSupportTicket(int id)
         {
-            var resolvedTickets = await _resolvedTickets.GetResolvedTicket(id);
-            return resolvedTickets;
+            var list = await _resolvedTickets.GetAllResolvedTickets();
+            // Loop through all the items the list to check for a match.
+            foreach (ResolvedTicketDTO item in list)
+            {
+                if (id == item.Id)
+                {
+                    var resolvedTicket = await _resolvedTickets.GetResolvedTicket(id);
+                    return resolvedTicket;
+                }
+            }
+            return BadRequest($"ID does not match a current resolved ticket. Check with Admin to ensure ticket was not removed.");
         }
 
         // PUT: api/LiveTickets/5
@@ -46,7 +55,7 @@ namespace ticketBotApi.Controllers
         {
             if (id != supportTicket.Id)
             {
-                return BadRequest();
+                return BadRequest($"ID does not match a current live ticket. Check if ticket has been resolved.");
             }
             var updatedTicket = await _resolvedTickets.UpdateResolvedTicket(id, supportTicket);
             return Ok(updatedTicket);
@@ -56,8 +65,16 @@ namespace ticketBotApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSupportTicket(int id)
         {
-            await _resolvedTickets.DeleteResolvedTicket(id);
-            return NoContent();
+            var list = await _resolvedTickets.GetAllResolvedTickets();
+            foreach (ResolvedTicketDTO item in list)
+            {
+                if (id == item.Id)
+                {
+                    await _resolvedTickets.DeleteResolvedTicket(id);
+                    return NoContent();
+                }
+            }
+            return BadRequest($"ID does not match a current live ticket. Check if ticket has been resolved.");
         }
     }
 }
