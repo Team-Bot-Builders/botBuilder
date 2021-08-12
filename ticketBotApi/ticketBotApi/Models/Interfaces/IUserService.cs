@@ -12,7 +12,9 @@ namespace ticketBotApi.Models.Interfaces
     {
         public Task<UserDTO> Register(RegisterUserDTO data, ModelStateDictionary modelState);
         public Task<UserDTO> Login(string username, string password);
+        public Task<UserDTO> BotLogin(string username, string password);
         public Task<UserDTO> GetUser(ClaimsPrincipal principal);
+        public Task<UserDTO> AddRole(string username, string role);
 
     }
 }

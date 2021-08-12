@@ -16,6 +16,25 @@ namespace BuddyBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+        private string APIToken;
+
+        public static string BotLogin()
+        {
+            string url = "https://localhost:44322/api/Users/botlogin";
+            var client = new RestClient(url);
+            var request = new RestRequest();
+
+            request.AddJsonBody(new LoginDTO());
+
+            var response = client.Post(request);
+
+            UserDTO user = JsonConvert.DeserializeObject<UserDTO>(response.Content);
+            if (user.Token != null)
+            {
+                Console.WriteLine("API Login Successful");
+            }
+            return user.Token;
+        }
 
         // Permission: Anyone
         [Command("myRoleInfo")]
@@ -86,6 +105,7 @@ namespace BuddyBot.Modules
         }
 
         //Permission: Anyone
+
         [Command("help")]
         public async Task Help()
         {
@@ -124,12 +144,19 @@ namespace BuddyBot.Modules
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetOpenTickets()
         {
+            if(APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             string url = "https://localhost:44322/api/LiveTickets";
             var client = new RestClient(url);
+            Console.WriteLine(APIToken);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
 
             var response = client.Get(request);
-
+            
             Console.WriteLine(response.StatusCode.ToString() + "      " + response.Content);
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
@@ -150,8 +177,14 @@ namespace BuddyBot.Modules
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetTicket(int id)
         {
+            if (APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             string url = $"https://localhost:44322/api/LiveTickets/{id}";
             var client = new RestClient(url);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
 
             var response = client.Get(request);
@@ -174,18 +207,24 @@ namespace BuddyBot.Modules
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task CloseTicket(int id, string resolution)
         {
+            if (APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             Console.WriteLine("hit the route");
-            string url = $"https://localhost:44322/api/LiveTickets/close/{id}";
+            string url = $"https://localhost:44322/close/{id}";
             var client = new RestClient(url);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
             string sender = Context.User.Username;
             CloseTicketDTO closing = new CloseTicketDTO()
             {
+                Closed = DateTime.Now,
                 Resolution = resolution,
-                Resolver = sender,
-                Closed = DateTime.Now
+                Resolver = sender
             };
-            Console.WriteLine("made the DTO");
+            Console.WriteLine($"made the DTO, id: {id}, resolution: {resolution}");
 
             request.AddJsonBody(closing);
 
@@ -195,6 +234,7 @@ namespace BuddyBot.Modules
             var response = client.Put(request);
 
             Console.WriteLine(response.Content);
+            Console.WriteLine("I'm trying to make fetch happen");
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
 
