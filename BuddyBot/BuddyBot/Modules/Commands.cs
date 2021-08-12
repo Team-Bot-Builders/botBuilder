@@ -129,8 +129,8 @@ namespace BuddyBot.Modules
         {
             string sender = Context.User.Username;
 
-            await Context.User.SendMessageAsync($"Hello {sender}! Thank you for using SupportBot!\n  To submit a ticket, please use the command !newTicket here followed by a brief description of your troubles in parantheses. A moderator will assist you shortly.");
-            await Context.User.SendMessageAsync($"Example: !newTicket \"Having trouble logging in.\"");
+            await Context.User.SendMessageAsync($"Hello {sender}! Thank you for using SupportBot!\n  To submit a ticket, please use the command [!]newTicket here followed by a brief description of your troubles in parantheses. A moderator will assist you shortly.");
+            await Context.User.SendMessageAsync($"Example: [!]newTicket \"Having trouble logging in.\"");
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace BuddyBot.Modules
             {
                 APIToken = BotLogin();
             }
-            Console.WriteLine("hit the route");
+
             string url = $"https://localhost:44322/api/LiveTickets/close/{id}";
             var client = new RestClient(url);
             client.Authenticator = new JwtAuthenticator(APIToken);
@@ -259,16 +259,12 @@ namespace BuddyBot.Modules
                 Resolution = resolution,
                 Resolver = sender
             };
-            Console.WriteLine($"made the DTO, id: {id}, resolution: {resolution}");
 
             request.AddJsonBody(closing);
 
-            Console.WriteLine("added the DTO to the Body");
 
             var response = client.Put(request);
 
-            Console.WriteLine(response.Content);
-            Console.WriteLine("I'm trying to make fetch happen");
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
 
