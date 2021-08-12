@@ -20,9 +20,10 @@ namespace BuddyBot
 {
     class Program
     {
-
+        // Set up tokens
         private static string BotToken;
         private static string APIToken;
+
 
         static void Main(string[] args)
         {
@@ -45,10 +46,14 @@ namespace BuddyBot
             new Program().RunBotAsync().GetAwaiter().GetResult();
         }
         
+        // Dependency Injection
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
 
+        /// <summary>
+        /// The list of things that the bot will conitnually attempt to do (inputs allowing)
+        /// </summary>
         public async Task RunBotAsync()
         {
 
@@ -75,18 +80,28 @@ namespace BuddyBot
 
         }
 
+        /// <summary>
+        /// Setup logging message pipeline
+        /// </summary>
         private System.Threading.Tasks.Task _client_Log(LogMessage arg)
         {
             Console.WriteLine(arg);
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Read in a command and progress through the received commands
+        /// </summary>
         public async Task RegisterCommandsAsync()
         {
             _client.MessageReceived += HandleCommandAsync;
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services) ;
         }
 
+        /// <summary>
+        /// Handling a single command sent to the bot
+        /// </summary>
+        /// <param name="arg">Message that the bot reads from a server it is attached to.</param>
         private async Task HandleCommandAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
@@ -105,6 +120,10 @@ namespace BuddyBot
             }
         }
 
+        /// <summary>
+        /// Log the bot in to the API server to receive a token
+        /// </summary>
+        /// <returns>Jason Web Token</returns>
         public static string BotLogin()
         {
             string url = "https://localhost:44322/api/Users/botlogin";

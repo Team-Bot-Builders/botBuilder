@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.DTO
 {
+    /// <summary>
+    /// DTO for closed tickets
+    /// </summary>
     public class CloseTicketDTO
     {
         [Required]

@@ -14,10 +14,18 @@ using RestSharp.Authenticators;
 
 namespace BuddyBot.Modules
 {
+    /// <summary>
+    /// All of the commands that the bot will respond to
+    /// </summary>
     public class Commands : ModuleBase<SocketCommandContext>
     {
+        // APIToken for use with authentication
         private string APIToken;
 
+        /// <summary>
+        /// Log the bot in to the API Server to receive access token
+        /// </summary>
+        /// <returns> JWT</returns>
         public static string BotLogin()
         {
             string url = "https://localhost:44322/api/Users/botlogin";
@@ -36,7 +44,9 @@ namespace BuddyBot.Modules
             return user.Token;
         }
 
-        // Permission: Anyone
+        /// <summary>
+        /// Debug command that returns contextual information about the user from the message.
+        /// </summary>
         [Command("myRoleInfo")]
         public async Task MyRoleInfo()
         {
@@ -48,7 +58,11 @@ namespace BuddyBot.Modules
 
         }
 
-        // Permission: Admin
+        /// <summary>
+        /// Promote a user to a moderator
+        /// </summary>
+        /// <param name="username">Username of individual to be promoted.</param>
+        /// <permission> Administrators.</permission>
         [Command("addRole")]
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task AddRole(string username)
@@ -85,16 +99,19 @@ namespace BuddyBot.Modules
         }
 
 
-        //Basic ping test
-        //Permission: Anyone
+        /// <summary>
+        /// Basic debug ping test
+        /// </summary>
+        /// <returns> pong response message to user</returns>
         [Command("ping")]
         public async Task Ping()
         {
             await ReplyAsync("Pong");
         }
 
-        //Reads user input
-        //Permission: Anyone
+        /// <summary>
+        /// Basic debug, returns input string and username of sender
+        /// </summary>
         [Command("callback")]
         public async Task Callback(string message)
         {
@@ -104,8 +121,9 @@ namespace BuddyBot.Modules
             await Context.User.SendMessageAsync("Here is your DM message! ;) " + message + " " + temp);
         }
 
-        //Permission: Anyone
-
+        /// <summary>
+        /// Gives back basic information on how to support a ticket
+        /// </summary>
         [Command("help")]
         public async Task Help()
         {
@@ -115,7 +133,11 @@ namespace BuddyBot.Modules
             await Context.User.SendMessageAsync($"Example: !newTicket \"Having trouble logging in.\"");
         }
 
-        //Permision: Anyone
+        /// <summary>
+        /// Submit a new ticket to the server
+        /// </summary>
+        /// <param name="description">Description of the issues that this ticket should address.</param>
+        /// <returns>Confirmation message to sender that ticket was sent</returns>
         [Command("newTicket")]
         public async Task NewTicket(string description)
         {
@@ -138,8 +160,12 @@ namespace BuddyBot.Modules
 
             await Context.User.SendMessageAsync("Your ticket has been added to the queue!");
         }
-        
-        //Permission: Mod/Admin
+
+        /// <summary>
+        /// Retreive all open ticket from the Server
+        /// </summary>
+        /// <permission>Administrators and Moderators.</permission>
+        /// <returns>Message containing all open tickets</returns>
         [Command("viewOpenTickets")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetOpenTickets()
@@ -171,8 +197,12 @@ namespace BuddyBot.Modules
             }
 
         }
-        
-        //Permission Mod/Admin
+
+        /// <summary>
+        /// Retreive submitted ticket by id
+        /// </summary>
+        /// <permission>Administrators and Moderators.</permission>
+        /// <returns>Message containing all open tickets</returns>
         [Command("getTicket")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task GetTicket(int id)
@@ -201,8 +231,13 @@ namespace BuddyBot.Modules
             }
         }
 
-        //use to close a live ticket and update it with resolution
-        //Permission: Mod/Admin
+        /// <summary>
+        /// Resolve a particular ticket
+        /// </summary>
+        /// <param name="id">Id of ticket that is being targeted to be closed.</param>
+        /// <param name="resolution">Description of the resolution of the ticket issue.</param>
+        /// <permission>Administrators and Moderators.</permission>
+        /// <returns>Message back to user confirming the ticket was closed</returns>
         [Command("closeTicket")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task CloseTicket(int id, string resolution)
@@ -230,7 +265,6 @@ namespace BuddyBot.Modules
 
             Console.WriteLine("added the DTO to the Body");
 
-            //TODO: Figure out why the response is bugged
             var response = client.Put(request);
 
             Console.WriteLine(response.Content);
@@ -240,12 +274,5 @@ namespace BuddyBot.Modules
 
             await Context.User.SendMessageAsync($"Ticket has been marked as resolved:\n {jsonFormatted}");
         }
-        //Send out to API with info from the command
-
-        //Spit out info on user that triggers this
-        //MemberInfo https://docs.stillu.cc/api/Discord.Rest.MemberInfo.html
-
-        //Stretch Goals
-        //Have bot register user with API server
     }
 }
