@@ -247,7 +247,7 @@ namespace BuddyBot.Modules
                 APIToken = BotLogin();
             }
             Console.WriteLine("hit the route");
-            string url = $"https://localhost:44322/close/{id}";
+            string url = $"https://localhost:44322/api/LiveTickets/close/{id}";
             var client = new RestClient(url);
             client.Authenticator = new JwtAuthenticator(APIToken);
 
