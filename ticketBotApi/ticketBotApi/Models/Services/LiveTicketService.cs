@@ -30,12 +30,12 @@ namespace ticketBotApi.Models.Services
             _context.Entry(newTicket).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return await _context.Tickets
-                .Select(ticket => new LiveTicketDTO
+                .Select(t => new LiveTicketDTO
                 {
-                    Id = ticket.Id,
-                    Requestor = ticket.Requestor,
-                    Description = ticket.Description
-                }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
+                    Id = t.Id,
+                    Requestor = t.Requestor,
+                    Description = t.Description
+                }).FirstOrDefaultAsync(t => t.Description == newTicket.Description);
         }
 
         public async Task<List<LiveTicketDTO>> GetAllLiveTickets()
