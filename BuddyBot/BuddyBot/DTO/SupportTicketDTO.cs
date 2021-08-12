@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.DTO
 {
+    /// <summary>
+    /// DTO for full support tickets
+    /// </summary>
     class SupportTicketDTO
     {
         public int Id { get; set; }

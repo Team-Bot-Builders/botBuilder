@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.DTO
 {
+    /// <summary>
+    /// DTO for users
+    /// </summary>
     public class UserDTO
     {
         public string Id { get; set; }

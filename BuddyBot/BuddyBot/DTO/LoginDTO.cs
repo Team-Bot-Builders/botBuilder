@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.DTO
 {
+    /// <summary>
+    /// DTO for bot login information for server
+    /// </summary>
     class LoginDTO
     {
         public string Username { get; set; } = "BuddyBot";
