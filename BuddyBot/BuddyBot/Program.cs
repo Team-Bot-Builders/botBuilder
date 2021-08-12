@@ -9,6 +9,12 @@ using DotEnvStuff;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using BuddyBot.Modules;
+using BuddyBot.DTO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using RestSharp.Authenticators;
+using RestSharp.Serialization;
 
 namespace BuddyBot
 {
@@ -16,6 +22,7 @@ namespace BuddyBot
     {
 
         private static string BotToken;
+        private static string APIToken;
 
         static void Main(string[] args)
         {
@@ -32,6 +39,8 @@ namespace BuddyBot
                         var root = Directory.GetCurrentDirectory();
                         var dotenv = Path.Combine(root, ".env");
                         DotEnv.Load(dotenv);*/
+
+            APIToken = BotLogin();
 
             new Program().RunBotAsync().GetAwaiter().GetResult();
         }
@@ -92,6 +101,25 @@ namespace BuddyBot
             }
         }
 
+        public static string BotLogin()
+        {
+            string url = "https://localhost:44322/api/Users/botlogin";
+            var client = new RestClient(url);
+            var request = new RestRequest();
 
+            request.AddJsonBody(new LoginDTO());
+
+            var response = client.Post(request);
+
+            string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
+            Console.WriteLine(jsonFormatted);
+
+            UserDTO user = JsonConvert.DeserializeObject<UserDTO>(response.Content);
+            if(user.Token != null)
+            {
+                Console.WriteLine("API Login Successful");
+            }
+            return user.Token;
+        }
     }
 }

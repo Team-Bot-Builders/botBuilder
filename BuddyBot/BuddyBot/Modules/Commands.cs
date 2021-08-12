@@ -16,6 +16,25 @@ namespace BuddyBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+        private string APIToken;
+
+        public static string BotLogin()
+        {
+            string url = "https://localhost:44322/api/Users/botlogin";
+            var client = new RestClient(url);
+            var request = new RestRequest();
+
+            request.AddJsonBody(new LoginDTO());
+
+            var response = client.Post(request);
+
+            UserDTO user = JsonConvert.DeserializeObject<UserDTO>(response.Content);
+            if (user.Token != null)
+            {
+                Console.WriteLine("API Login Successful");
+            }
+            return user.Token;
+        }
 
         [Command("myRoleInfo")]
         public async Task MyRoleInfo()
@@ -80,78 +99,6 @@ namespace BuddyBot.Modules
             await Context.User.SendMessageAsync("Here is your DM message! ;) " + message + " " + temp);
         }
 
-        //Adding Role "Moderator"
-        [Command("moderator")]
-        //[RequireUserPermission(GuildPermission.KickMembers)]
-        public async Task Moderator()
-        {
-            GuildPermissions newSet = new GuildPermissions(
-                //bool createInstantInvite = 
-                false,
-                //bool kickMembers = 
-                false,
-                //bool banMembers = 
-                false,
-                //bool administrator = 
-                false,
-                //bool manageChannels = 
-                false,
-                //bool manageGuild = 
-                false,
-                //bool addReactions = 
-                false,
-                //bool viewAuditLog = 
-                false,
-                //bool viewGuildInsights = 
-                false,
-                //bool viewChannel = 
-                false,
-                //bool sendMessages = 
-                false,
-                //bool sendTTSMessages = 
-                false,
-                //bool manageMessages = 
-                false,
-                //bool embedLinks = 
-                false,
-                //bool attachFiles = 
-                false,
-                //bool readMessageHistory = 
-                false,
-                //bool mentionEveryone = 
-                false,
-                //bool useExternalEmojis = 
-                false,
-                //bool connect = 
-                false,
-                //bool speak = 
-                false,
-                //bool muteMembers = 
-                false,
-                //bool deafenMembers = 
-                false,
-                //bool moveMembers = 
-                false,
-                //bool useVoiceActivation = 
-                false,
-                //bool prioritySpeaker = 
-                false,
-                //bool stream =
-                false,
-                //bool changeNickname = 
-                false,
-                //bool manageNicknames = 
-                false,
-                //bool manageRoles = 
-                false,
-                //bool manageWebhooks = 
-                false,
-                //bool manageEmojis = 
-                false);
-
-            await ReplyAsync("Pong");
-        }
-
         [Command("help")]
         public async Task Help()
         {
@@ -185,12 +132,19 @@ namespace BuddyBot.Modules
         [Command("viewOpenTickets")]
         public async Task GetOpenTickets()
         {
+            if(APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             string url = "https://localhost:44322/api/LiveTickets";
             var client = new RestClient(url);
+            Console.WriteLine(APIToken);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
 
             var response = client.Get(request);
-
+            
             Console.WriteLine(response.StatusCode.ToString() + "      " + response.Content);
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
@@ -201,8 +155,14 @@ namespace BuddyBot.Modules
         [Command("getTicket")]
         public async Task GetTicket(int id)
         {
+            if (APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             string url = $"https://localhost:44322/api/LiveTickets/{id}";
             var client = new RestClient(url);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
 
             var response = client.Get(request);
@@ -216,18 +176,24 @@ namespace BuddyBot.Modules
         [Command("closeTicket")]
         public async Task CloseTicket(int id, string resolution)
         {
+            if (APIToken == null)
+            {
+                APIToken = BotLogin();
+            }
             Console.WriteLine("hit the route");
-            string url = $"https://localhost:44322/api/LiveTickets/close/{id}";
+            string url = $"https://localhost:44322/close/{id}";
             var client = new RestClient(url);
+            client.Authenticator = new JwtAuthenticator(APIToken);
+
             var request = new RestRequest();
             string sender = Context.User.Username;
             CloseTicketDTO closing = new CloseTicketDTO()
             {
+                Closed = DateTime.Now,
                 Resolution = resolution,
-                Resolver = sender,
-                Closed = DateTime.Now
+                Resolver = sender
             };
-            Console.WriteLine("made the DTO");
+            Console.WriteLine($"made the DTO, id: {id}, resolution: {resolution}");
 
             request.AddJsonBody(closing);
 
@@ -237,6 +203,7 @@ namespace BuddyBot.Modules
             var response = client.Put(request);
 
             Console.WriteLine(response.Content);
+            Console.WriteLine("I'm trying to make fetch happen");
 
             string jsonFormatted = JValue.Parse(response.Content.ToString()).ToString(Formatting.Indented);
 

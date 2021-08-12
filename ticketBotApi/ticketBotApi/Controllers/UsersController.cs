@@ -45,12 +45,30 @@ namespace ticketBotApi.Controllers
 
             return user;
         }
+        [HttpPost("botlogin")]
+        public async Task<ActionResult<UserDTO>> BotLogin(LoginDTO data)
+        {
+            var user = await _userService.BotLogin(data.Username, data.Password);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return user;
+        }
 
         [Authorize]
         [HttpGet("me")]
         public async Task<ActionResult<UserDTO>> Me()
         {
             return await _userService.GetUser(this.User);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPut("/roles/{username}/{role}")]
+        public async Task<UserDTO> AddRole(string username, string role)
+        {
+            return await _userService.AddRole(username, role);
         }
     }
 }
