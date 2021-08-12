@@ -44,12 +44,12 @@ namespace ticketBotApi.Models.Services
 
             //Return the stored ticket
             return await _context.Tickets
-                .Select(ticket => new LiveTicketDTO
+                .Select(t => new LiveTicketDTO
                 {
-                    Id = ticket.Id,
-                    Requestor = ticket.Requestor,
-                    Description = ticket.Description
-                }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
+                    Id = t.Id,
+                    Requestor = t.Requestor,
+                    Description = t.Description
+                }).FirstOrDefaultAsync(t => t.Description == newTicket.Description);
         }
 
         /// <summary>
