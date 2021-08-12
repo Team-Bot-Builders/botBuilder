@@ -11,15 +11,25 @@ namespace ticketBotApi.Models.Services
 {
     public class LiveTicketService : ILiveTickets
     {
+        // Dependency Injection
         private TicketBotDbContext _context;
 
+        /// <summary>
+        /// LiveTicketService Constructor
+        /// </summary>
         public LiveTicketService(TicketBotDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Create a support ticket
+        /// </summary>
+        /// <param name="ticket">A LiveTicketDTO.</param>
+        /// <returns> The ticket stored in the database</returns>
         public async Task<LiveTicketDTO> CreateLiveTicket(LiveTicketDTO ticket)
         {
+            //Create a support ticket from the input information
             SupportTicket newTicket = new SupportTicket()
             {
                 Created = ticket.Created,
@@ -27,8 +37,12 @@ namespace ticketBotApi.Models.Services
                 Description = ticket.Description,
                 Resolved = false
             };
+
+            //Save the ticket in the database
             _context.Entry(newTicket).State = EntityState.Added;
             await _context.SaveChangesAsync();
+
+            //Return the stored ticket
             return await _context.Tickets
                 .Select(ticket => new LiveTicketDTO
                 {
@@ -38,6 +52,10 @@ namespace ticketBotApi.Models.Services
                 }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
         }
 
+        /// <summary>
+        /// Return all un-closed tickets in the database
+        /// </summary>
+        /// <returns>List of tickets</returns>
         public async Task<List<LiveTicketDTO>> GetAllLiveTickets()
         {
             return await _context.Tickets
@@ -51,6 +69,11 @@ namespace ticketBotApi.Models.Services
                 }).ToListAsync();
         }
 
+        /// <summary>
+        /// Retreive a live ticket by that ticket's ID
+        /// </summary>
+        /// <param name="id">The id of a live ticket.</param>
+        /// <returns>The specified ticket</returns>
         public async Task<LiveTicketDTO> GetLiveTicket(int id)
         {
             SupportTicket ticket = await _context.Tickets.FindAsync(id);
@@ -64,6 +87,12 @@ namespace ticketBotApi.Models.Services
                 }).FirstOrDefaultAsync(t => t.Id == ticket.Id);
         }
 
+        /// <summary>
+        /// Update the information stored in a ticket
+        /// </summary>
+        /// <param name="id">The id of a live ticket.</param>
+        /// <param name="ticket">The updated ticket state.</param>
+        /// <returns>The specified ticket</returns>
         public async Task<SupportTicket> UpdateTicket(int id, SupportTicket ticket)
         {
             _context.Entry(ticket).State = EntityState.Modified;
@@ -72,7 +101,12 @@ namespace ticketBotApi.Models.Services
             return await _context.Tickets.FindAsync(id);
         }
 
-        
+        /// <summary>
+        /// Update the status of a ticket
+        /// </summary>
+        /// <param name="id">The id of a ticket to close.</param>
+        /// <param name="closing">The updated ticket state.</param>
+        /// <returns>The specified ticket after it has been closed</returns>
         public async Task<ResolvedTicketDTO> CloseTicket(int id, CloseTicketDTO closing)
         {
             SupportTicket thisTicket = await _context.Tickets.FindAsync(id);
@@ -97,6 +131,10 @@ namespace ticketBotApi.Models.Services
                 }).FirstOrDefaultAsync(t => t.Id == id);
         }
 
+        /// <summary>
+        /// Removes a ticket from the database
+        /// </summary>
+        /// <param name="id">The id of a ticket to remove.</param>
         public async Task DeleteLiveTicket(int id)
         {
             SupportTicket ticket = await _context.Tickets.FindAsync(id);
