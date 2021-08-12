@@ -13,5 +13,6 @@ namespace ticketBotApi.Models.DTOs
         [Required]
         public string Password { get; set; }
         public string Email { get; set; }
+        public IList<string> Roles { get; set; }
     }
 }

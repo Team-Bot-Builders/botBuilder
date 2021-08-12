@@ -33,11 +33,15 @@ namespace ticketBotApi.Models.Services
 
             if(result.Succeeded)
             {
+
+                await _userManager.AddToRolesAsync(user, data.Roles);
+
                 return new UserDTO
                 {
                     Id = user.Id,
                     Username = user.UserName,
                     Token = await _tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(60)),
+                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
 
@@ -63,12 +67,29 @@ namespace ticketBotApi.Models.Services
                 {
                     Id = user.Id,
                     Username = user.UserName,
-                    Token = await _tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(60))
+                    Token = await _tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(60)),
+                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
             return null;
         }
+        public async Task<UserDTO> BotLogin(string username, string password)
+        {
+            var user = await _userManager.FindByNameAsync(username);
 
+            if (await _userManager.CheckPasswordAsync(user, password))
+            {
+                return new UserDTO
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    Token = await _tokenService.GetTokenAsync(user, System.TimeSpan.FromMinutes(300)),
+                    Roles = await _userManager.GetRolesAsync(user)
+                };
+            }
+            return null;
+        }
+        
         public async Task<UserDTO> GetUser(ClaimsPrincipal principal)
         {
             var user = await _userManager.GetUserAsync(principal);
@@ -76,6 +97,19 @@ namespace ticketBotApi.Models.Services
             {
                 Id = user.Id,
                 Username = user.UserName
+            };
+        }
+        public async Task<UserDTO> AddRole(string username, string role)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+
+            await _userManager.AddToRoleAsync(user, role);
+
+            return new UserDTO
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                Roles = await _userManager.GetRolesAsync(user)
             };
         }
     }
