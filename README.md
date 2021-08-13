@@ -1,19 +1,18 @@
 # Bot Builder
 
-> This solution is a bot created for midterm projects. 
-> Live demo [_here_](https://www.example.com).
+> This solution is a bot created for midterm projects at Code Fellows for 401 in .Net.
+
+> [Live Server Demo](https://ticketbotapi20210812160408.azurewebsites.net/index.html)
 
 ## Table of Contents
 
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Images](#screenshots)
+* [Images](#images)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 * [License](#license)
 * [Other Docs](#links)
@@ -34,9 +33,18 @@
 
 ## Features
 
-List the ready features here:
+### Bot Features
 
-* 
+* Can respond to User via [!]help command.
+* Will take input from Users to create a help ticket, and store each ticket in a database.
+* Can request and change data within database.
+* Is set up with Authorization and will only allow users with specific roles to access specific data.
+
+### API Features
+
+* Tracks all tickets, both live and resolved.
+* Keeps records of all users and their roles.
+* Allows administrators to update users, user roles, ticket data, etc.
 
 ## Images
 
@@ -48,56 +56,39 @@ List the ready features here:
 
 ## Setup
 
-Fill later
+In order to run this you will need to pull down the entire github repo and publish the API to the web (we used Azure). Follow directions from Discord Documentation and the YouTube tutorial listed in resources to get your bot connected to your Discord Server.
 
 ## Usage
 
-Fill later
+The Discord Bot handles ticket requests. You can use it on a large or small server to receieve as a way to handle and organize tickets. The bot will take a problem description from the User, and than acquire that users name and time of request. Moderators will have access to all open tickets and will have the ability to close them, but onl admins can view closed tickets and delete tickets from the record.
 
 ## Project Status
 
-Project is: in progress
-
-## Room for Improvement
-
-Room for improvement:
-
-* Improvement to be done 1
-* Improvement to be done 2
-
-To do:
-
-* Feature to be added 1
-* Feature to be added 2
-
-## Acknowledgements
-
-### Authors
-
-* **Steven Boston**
-* **Charles Bofferding**
-* **Joshua Haddock**
-
-Co-Contributors
-
-* 
+Project is: Complete
 
 ## Contact
 
-Created by
+Authors
 
-- [Joshua Haddock](https://www.linkedin.com/in/joshuahaddock/)
-- [Steven Boston](https://www.linkedin.com/in/steven-boston/)
-- [Charles Bofferding](https://www.linkedin.com/in/charles-bofferding/)
+* [Joshua Haddock](https://www.linkedin.com/in/joshuahaddock/)
+* [Steven Boston](https://www.linkedin.com/in/steven-boston/)
+* [Charles Bofferding](https://www.linkedin.com/in/charles-bofferding/)
 
-feel free to contact any of us via the above links
+feel free to contact any of us via the above links.
 
 ## License
 
 This project is open source and available under the [MIT License](./LICENSE).
 
-## Other Links
+## Links
 
 * [Project Pitch](./ProjectPitch.md)
 * [Team Agreements](./TeamAgreements.md)
 * [User Stories](https://github.com/Team-Bot-Builders/botBuilder/projects/1)
+
+### Resources
+
+* [RestSharp](https://restsharp.dev/)
+* [Discord Bot Docs](https://discord.com/developers/docs/intro)
+* [YouTube Bot Tutorial Playlist](https://www.youtube.com/playlist?list=PLaqoc7lYL3ZDCDT9TcP_5hEKuWQl7zudR)
+* [Deployed API](https://ticketbotapi20210812160408.azurewebsites.net/index.html)
